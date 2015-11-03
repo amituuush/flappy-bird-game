@@ -101,6 +101,7 @@ gulp.task('scripts', function() {
     .pipe(source('app.js'))
     .pipe(buffer())
     .pipe(uglify())
+    .pipe(gulp.dest('site/js'));
     .pipe(gulp.dest('build/js'));
 });
 
