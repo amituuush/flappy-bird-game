@@ -20,7 +20,9 @@ var notify = require("gulp-notify");
 
 // JavaScript linting task
 gulp.task('jshint', function() {
-  return gulp.src('site/js/*.js')
+  return gulp.src([
+    'site/js/*.js', 
+    '!site/js/app.js'])
     .pipe(plumber({
       errorHandler: reportError
       }))
@@ -74,7 +76,9 @@ var reportError = function (error) {
 // Watch task
 gulp.task('watch', function() {
   livereload.listen();
-  gulp.watch('site/js/*.js', ['jshint']);
+  gulp.watch([
+    'site/js/*.js', 
+    '!site/js/app.js'], ['jshint']);
   gulp.watch('site/scss/*.scss', ['sass']);
   gulp.watch('site/index.html', ['html-reload']);
 });
@@ -86,6 +90,21 @@ gulp.task('html', function() {
     .pipe(minifyHTML())
     .pipe(gulp.dest('build/'));
 });
+
+gulp.task('scripts-combine', function() {
+  return browserify([
+    'site/js/main.js', 
+    'site/js/flappy_bird.js', 
+    'site/js/components/graphics/bird.js',
+    'site/js/components/graphics/pipe.js', 
+    'site/js/entities/bird.js',
+    'site/js/entities/pipe.js', 
+    'site/js/systems/graphics.js'])
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('site/js'))
+});
+
 
 // JavaScript build task, removes whitespace and concatenates all files
 gulp.task('scripts', function() {
@@ -101,7 +120,6 @@ gulp.task('scripts', function() {
     .pipe(source('app.js'))
     .pipe(buffer())
     .pipe(uglify())
-    .pipe(gulp.dest('site/js'))
     .pipe(gulp.dest('build/js'));
 });
 
@@ -131,7 +149,7 @@ gulp.task('default', ['jshint', 'sass', 'watch']);
 
 
 // Build task
-gulp.task('build', ['jshint', 'sass', 'html', 'scripts', 'styles', 'images']);
+gulp.task('build', ['jshint', 'sass', 'html', 'scripts', 'scripts-combine', 'styles', 'images']);
 
 
 
