@@ -1,6 +1,8 @@
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
+    console.log(entity);
 };
+
 
 BirdGraphicsComponent.prototype.draw = function(context) {
     var position = this.entity.components.physics.position;
