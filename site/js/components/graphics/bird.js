@@ -1,6 +1,5 @@
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
-    console.log(entity);
 };
 
 
