@@ -11,7 +11,7 @@ var Bird = function() {
 
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
     var collision = new collisionComponent.CircleCollisionComponent(this, 0.02);
-    collision.onCollision = this.onCollision.bind(this);
+    collision.onCollision = this.onCollision.bind(this); // ??
 
     this.components = {
         physics: physics,
@@ -21,8 +21,10 @@ var Bird = function() {
 };
 
 Bird.prototype.onCollision = function(entity) {
-    console.log(entity.components.physics.position);
-    clearInterval(flappyBird.pipeInterval);
+    console.log("collision!");
+    stopPipes();
+
+
 };
 
 exports.Bird = Bird;

@@ -11,8 +11,6 @@ var Pipe = function(positionX, positionY) {
 
     var graphics = new graphicsComponent.PipeGraphicsComponent(this);
 
-
-
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
     collision.onCollision = this.onCollision.bind(this);
 

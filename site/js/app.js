@@ -5,6 +5,7 @@ var CircleCollisionComponent = function(entity, radius) {
     this.type = 'circle';
 };
 
+
 CircleCollisionComponent.prototype.collidesWith = function(entity) {
     if (entity.components.collision.type == 'circle') {
         return this.collideCircle(entity);
@@ -47,10 +48,10 @@ CircleCollisionComponent.prototype.collideRect = function(entity) {
     var sizeB = entity.components.collision.size;
 
     var closest = {
-        x: clamp(positionA.x, positionB.x - sizeB.x / 2,
-                 positionB.x + sizeB.x / 2),
-        y: clamp(positionA.y, positionB.y - sizeB.y / 2,
-                 positionB.y + sizeB.y / 2)
+        x: clamp(positionA.x, positionB.x,
+                 positionB.x + sizeB.x),
+        y: clamp(positionA.y, positionB.y,
+                 positionB.y + sizeB.y)
     };
 
 
@@ -59,11 +60,13 @@ CircleCollisionComponent.prototype.collideRect = function(entity) {
     var diff = {x: positionA.x - closest.x,
                 y: positionA.y - closest.y};
 
-    var distanceSquared = diff.x * diff.x + diff.y * diff.y;
+    var distanceSquared = diff.x * diff.x + diff.y * diff.y; // calculates a^2 + b^2. distanceSquared now represents c^2, which is the distance between the center of the circle and the closest point of the pipe to the circle.
     return distanceSquared < radiusA * radiusA;
+    //we compare c^2, the distance between the center of the circle and the closest point of the pipe, to the radius^2. If the radius^2 is greater than c^2, then the center of the circle is closer to the closest point of the pipe than the distance of the radius. This means there is a collision between circle and pipe.
 };
 
 exports.CircleCollisionComponent = CircleCollisionComponent;
+
 },{}],2:[function(require,module,exports){
 var RectCollisionComponent = function(entity, size) {
     this.entity = entity;
@@ -191,7 +194,7 @@ var Bird = function() {
 
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
     var collision = new collisionComponent.CircleCollisionComponent(this, 0.02);
-    collision.onCollision = this.onCollision.bind(this);
+    collision.onCollision = this.onCollision.bind(this); // ??
 
     this.components = {
         physics: physics,
@@ -201,11 +204,14 @@ var Bird = function() {
 };
 
 Bird.prototype.onCollision = function(entity) {
-    console.log(entity.components.physics.position);
-    clearInterval(flappyBird.pipeInterval);
+    console.log("collision!");
+    stopPipes();
+
+
 };
 
 exports.Bird = Bird;
+
 },{"../components/collision/circle":1,"../components/graphics/bird":3,"../components/physics/physics":5,"../flappy_bird.js":8}],7:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/pipe");
 var physicsComponent = require("../components/physics/physics");
@@ -219,8 +225,6 @@ var Pipe = function(positionX, positionY) {
     physics.velocity.x = -0.65;
 
     var graphics = new graphicsComponent.PipeGraphicsComponent(this);
-
-
 
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
     collision.onCollision = this.onCollision.bind(this);
@@ -251,29 +255,40 @@ var FlappyBird = function() {
     this.input = new inputSystem.InputSystem(this.entities);
 };
 
-var pipeInterval;
+FlappyBird.prototype.startPipes = function() {
+    var start = window.setInterval(function newPipes() {
+    this.entities.push(new pipe.Pipe(1, (Math.random() * 0.5) + 0.35), new pipe.Pipe(1.7, (Math.random() * -0.5) - 0));
+
+    }.bind(this), 2000);
+};
+
+FlappyBird.prototype.stopPipes = function() {
+    clearInterval(start);
+};
+
 
 FlappyBird.prototype.run = function() {
     this.graphics.run();
     this.physics.run();
     this.input.run();
 
-    var pipeInterval = window.setInterval(function newPipes() {
-    this.entities.push(new pipe.Pipe(1, (Math.random() * 0.5) + 0.35), new pipe.Pipe(1.7, (Math.random() * -0.5) - 0));
+    this.startPipes();
 
-    }.bind(this), 2000);
+    // var logPipes = window.setInterval(function thePipes() {
+    //     for (var i = 1; i < this.entities.length; i++) {
+    //         if (this.entities[i].components.physics.position.x < 0) {
+    //         delete this.entities[i];
 
-    for (var i = 1; i < this.entities.length; i++) {
-        if (this.entities[i].components.physics.position.x < 0) {
-            delete this.entities[i];
-            console.log(this.entities);
-        }
+    //         }
+    //     }
+    // }.bind(this), 2000);
 
-    }
-    
 };
 
+
+
 exports.FlappyBird = FlappyBird;
+
 },{"./entities/bird":6,"./entities/pipe":7,"./systems/graphics":11,"./systems/input":12,"./systems/physics":13}],9:[function(require,module,exports){
 var flappyBird = require('./flappy_bird');
 
@@ -309,7 +324,7 @@ CollisionSystem.prototype.tick = function() {
 
             if (entityB.components.collision.onCollision) {
                 entityB.components.collision.onCollision(entityA);
-            }
+            } // this code seems like a waste of cpu since we only need to compare the first entity in the array to all the other entities. We don't need to compare pipes to pipes.
         }
     }
 };
@@ -407,4 +422,4 @@ PhysicsSystem.prototype.tick = function() {
 };
 
 exports.PhysicsSystem = PhysicsSystem;
-},{"./collision":10}]},{},[3,4,5,6,7,11,12,13,9,8]);
+},{"./collision":10}]},{},[9,8,3,4,5,1,2,6,7,11,12,13,10]);
