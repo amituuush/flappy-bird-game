@@ -184,7 +184,7 @@ exports.PhysicsComponent = PhysicsComponent;
 var graphicsComponent = require("../components/graphics/bird");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/circle");
-var flappyBird = require("../flappy_bird.js");
+var flappyBird = require("../flappy_bird");
 // var settings = require("../settings");
 
 var Bird = function() {
@@ -203,19 +203,18 @@ var Bird = function() {
     };
 };
 
-Bird.prototype.onCollision = function(entity) {
-    console.log("collision!");
-    stopPipes();
 
+Bird.prototype.onCollision = function(entity) {
 
 };
 
 exports.Bird = Bird;
 
-},{"../components/collision/circle":1,"../components/graphics/bird":3,"../components/physics/physics":5,"../flappy_bird.js":8}],7:[function(require,module,exports){
+},{"../components/collision/circle":1,"../components/graphics/bird":3,"../components/physics/physics":5,"../flappy_bird":8}],7:[function(require,module,exports){
 var graphicsComponent = require("../components/graphics/pipe");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/rect");
+var pipeSystem = require("../systems/pipesystem");
 // var settings = require("../settings");
 
 var Pipe = function(positionX, positionY) {
@@ -237,14 +236,16 @@ var Pipe = function(positionX, positionY) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-    // console.log("Pipe collided with bird");
+	console.log(pipeSystem.run);
 };
 
 exports.Pipe = Pipe;
-},{"../components/collision/rect":2,"../components/graphics/pipe":4,"../components/physics/physics":5}],8:[function(require,module,exports){
+
+},{"../components/collision/rect":2,"../components/graphics/pipe":4,"../components/physics/physics":5,"../systems/pipesystem":14}],8:[function(require,module,exports){
 var graphicsSystem = require('./systems/graphics');
 var physicsSystem = require('./systems/physics');
 var inputSystem = require('./systems/input');
+var pipeSystem = require('./systems/pipesystem');
 var bird = require('./entities/bird');
 var pipe = require('./entities/pipe');
 
@@ -253,17 +254,7 @@ var FlappyBird = function() {
     this.graphics = new graphicsSystem.GraphicsSystem(this.entities);
     this.physics = new physicsSystem.PhysicsSystem(this.entities);
     this.input = new inputSystem.InputSystem(this.entities);
-};
-
-FlappyBird.prototype.startPipes = function() {
-    var start = window.setInterval(function newPipes() {
-    this.entities.push(new pipe.Pipe(1, (Math.random() * 0.5) + 0.35), new pipe.Pipe(1.7, (Math.random() * -0.5) - 0));
-
-    }.bind(this), 2000);
-};
-
-FlappyBird.prototype.stopPipes = function() {
-    clearInterval(start);
+    this.pipes = new pipeSystem.PipeSystem(this.entities);
 };
 
 
@@ -271,8 +262,7 @@ FlappyBird.prototype.run = function() {
     this.graphics.run();
     this.physics.run();
     this.input.run();
-
-    this.startPipes();
+    this.pipes.run();
 
     // var logPipes = window.setInterval(function thePipes() {
     //     for (var i = 1; i < this.entities.length; i++) {
@@ -289,7 +279,7 @@ FlappyBird.prototype.run = function() {
 
 exports.FlappyBird = FlappyBird;
 
-},{"./entities/bird":6,"./entities/pipe":7,"./systems/graphics":11,"./systems/input":12,"./systems/physics":13}],9:[function(require,module,exports){
+},{"./entities/bird":6,"./entities/pipe":7,"./systems/graphics":11,"./systems/input":12,"./systems/physics":13,"./systems/pipesystem":14}],9:[function(require,module,exports){
 var flappyBird = require('./flappy_bird');
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -422,4 +412,25 @@ PhysicsSystem.prototype.tick = function() {
 };
 
 exports.PhysicsSystem = PhysicsSystem;
-},{"./collision":10}]},{},[9,8,3,4,5,1,2,6,7,11,12,13,10]);
+},{"./collision":10}],14:[function(require,module,exports){
+var pipe = require('../entities/pipe');
+
+var PipeSystem = function(entities) {
+    this.entities = entities;
+
+};
+
+PipeSystem.prototype.run = function() {
+    this.pipeFunction = window.setInterval(function newPipes() {
+    this.entities.push(new pipe.Pipe(1, (Math.random() * 0.5) + 0.35), new pipe.Pipe(1.7, (Math.random() * -0.5) - 0));
+    }.bind(this), 2000);
+};
+
+PipeSystem.prototype.stop = function() {
+    clearInterval(pipeFunction);
+};
+
+
+exports.PipeSystem = PipeSystem;
+
+},{"../entities/pipe":7}]},{},[9,8,3,4,5,1,2,6,7,11,12,13,10]);

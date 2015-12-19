@@ -26,8 +26,9 @@ gulp.task('jshint', function() {
     .pipe(plumber({
       errorHandler: reportError
       }))
-    .pipe(jshint()).on('error', console.log)
+    .pipe(jshint()).on('error', reportError)
     .pipe(jshint.reporter('default'));
+
 });
 
 // Compile Sass task

@@ -1,7 +1,7 @@
 var graphicsComponent = require("../components/graphics/bird");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/circle");
-var flappyBird = require("../flappy_bird.js");
+var flappyBird = require("../flappy_bird");
 // var settings = require("../settings");
 
 var Bird = function() {
@@ -20,10 +20,8 @@ var Bird = function() {
     };
 };
 
-Bird.prototype.onCollision = function(entity) {
-    console.log("collision!");
-    stopPipes();
 
+Bird.prototype.onCollision = function(entity) {
 
 };
 

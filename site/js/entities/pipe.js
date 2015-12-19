@@ -1,6 +1,7 @@
 var graphicsComponent = require("../components/graphics/pipe");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/rect");
+var pipeSystem = require("../systems/pipesystem");
 // var settings = require("../settings");
 
 var Pipe = function(positionX, positionY) {
@@ -22,7 +23,7 @@ var Pipe = function(positionX, positionY) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-    // console.log("Pipe collided with bird");
+	console.log(pipeSystem.run);
 };
 
 exports.Pipe = Pipe;
