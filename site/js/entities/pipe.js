@@ -23,7 +23,7 @@ var Pipe = function(positionX, positionY) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-	console.log(pipeSystem.run);
+    pipeSystem.PipeSystem.stop();
 };
 
 exports.Pipe = Pipe;

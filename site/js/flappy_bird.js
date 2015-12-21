@@ -4,9 +4,11 @@ var inputSystem = require('./systems/input');
 var pipeSystem = require('./systems/pipesystem');
 var bird = require('./entities/bird');
 var pipe = require('./entities/pipe');
+var ceiling = require('./entities/ceiling');
+var floor = require('./entities/floor');
 
 var FlappyBird = function() {
-    this.entities = [new bird.Bird()];
+    this.entities = [new bird.Bird(), new ceiling.Ceiling(), new floor.Floor()];
     this.graphics = new graphicsSystem.GraphicsSystem(this.entities);
     this.physics = new physicsSystem.PhysicsSystem(this.entities);
     this.input = new inputSystem.InputSystem(this.entities);
@@ -19,15 +21,6 @@ FlappyBird.prototype.run = function() {
     this.physics.run();
     this.input.run();
     this.pipes.run();
-
-    // var logPipes = window.setInterval(function thePipes() {
-    //     for (var i = 1; i < this.entities.length; i++) {
-    //         if (this.entities[i].components.physics.position.x < 0) {
-    //         delete this.entities[i];
-
-    //         }
-    //     }
-    // }.bind(this), 2000);
 
 };
 
