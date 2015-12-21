@@ -21,9 +21,10 @@ FlappyBird.prototype.run = function() {
     this.physics.run();
     this.input.run();
     this.pipes.run();
-
 };
 
-
+FlappyBird.prototype.stop = function() {
+  this.pipes.stop();
+};
 
 exports.FlappyBird = FlappyBird;
