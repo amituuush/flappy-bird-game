@@ -23,8 +23,7 @@ var Ceiling = function() {
 };
 
 Ceiling.prototype.onCollision = function() {
-    console.log("Collision with ceiling");
-
+    window.app.stop();
 };
 
 exports.Ceiling = Ceiling;

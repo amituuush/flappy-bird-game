@@ -2,7 +2,7 @@ var graphicsComponent = require("../components/graphics/pipe");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/rect");
 var pipeSystem = require("../systems/pipesystem");
-// var settings = require("../settings");
+var flappyBird = require("../flappy_bird");
 
 var Pipe = function(positionX, positionY) {
 	var physics = new physicsComponent.PhysicsComponent(this);
@@ -13,6 +13,7 @@ var Pipe = function(positionX, positionY) {
     var graphics = new graphicsComponent.PipeGraphicsComponent(this);
 
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
+		var pipesystem = new pipeSystem.PipeSystem(this);
     collision.onCollision = this.onCollision.bind(this);
 
     this.components = {
@@ -23,7 +24,7 @@ var Pipe = function(positionX, positionY) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-    pipeSystem.PipeSystem.stop();
+    window.app.stop();
 };
 
 exports.Pipe = Pipe;

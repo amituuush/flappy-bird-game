@@ -23,8 +23,7 @@ var Floor = function() {
 };
 
 Floor.prototype.onCollision = function() {
-    console.log("Collision with floor");
-
+    window.app.stop();
 };
 
 exports.Floor = Floor;

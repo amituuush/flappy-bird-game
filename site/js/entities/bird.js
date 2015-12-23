@@ -20,9 +20,9 @@ var Bird = function() {
     };
 };
 
-
 Bird.prototype.onCollision = function(entity) {
-
+    this.components.physics.acceleration.y = 0;
+    this.components.physics.velocity.y = 0;
 };
 
 exports.Bird = Bird;

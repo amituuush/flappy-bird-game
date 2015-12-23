@@ -246,9 +246,9 @@ var Bird = function() {
     };
 };
 
-
 Bird.prototype.onCollision = function(entity) {
-
+    this.components.physics.acceleration.y = 0;
+    this.components.physics.velocity.y = 0;
 };
 
 exports.Bird = Bird;
@@ -279,8 +279,7 @@ var Ceiling = function() {
 };
 
 Ceiling.prototype.onCollision = function() {
-    console.log("Collision with ceiling");
-
+    window.app.stop();
 };
 
 exports.Ceiling = Ceiling;
@@ -311,8 +310,7 @@ var Floor = function() {
 };
 
 Floor.prototype.onCollision = function() {
-    console.log("Collision with floor");
-
+    window.app.stop();
 };
 
 exports.Floor = Floor;
@@ -322,7 +320,7 @@ var graphicsComponent = require("../components/graphics/pipe");
 var physicsComponent = require("../components/physics/physics");
 var collisionComponent = require("../components/collision/rect");
 var pipeSystem = require("../systems/pipesystem");
-// var settings = require("../settings");
+var flappyBird = require("../flappy_bird");
 
 var Pipe = function(positionX, positionY) {
 	var physics = new physicsComponent.PhysicsComponent(this);
@@ -333,6 +331,7 @@ var Pipe = function(positionX, positionY) {
     var graphics = new graphicsComponent.PipeGraphicsComponent(this);
 
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
+		var pipesystem = new pipeSystem.PipeSystem(this);
     collision.onCollision = this.onCollision.bind(this);
 
     this.components = {
@@ -343,12 +342,12 @@ var Pipe = function(positionX, positionY) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-    pipeSystem.PipeSystem.stop();
+    window.app.stop();
 };
 
 exports.Pipe = Pipe;
 
-},{"../components/collision/rect":2,"../components/graphics/pipe":6,"../components/physics/physics":7,"../systems/pipesystem":18}],12:[function(require,module,exports){
+},{"../components/collision/rect":2,"../components/graphics/pipe":6,"../components/physics/physics":7,"../flappy_bird":12,"../systems/pipesystem":18}],12:[function(require,module,exports){
 var graphicsSystem = require('./systems/graphics');
 var physicsSystem = require('./systems/physics');
 var inputSystem = require('./systems/input');
@@ -372,7 +371,10 @@ FlappyBird.prototype.run = function() {
     this.physics.run();
     this.input.run();
     this.pipes.run();
+};
 
+FlappyBird.prototype.stop = function() {
+    this.pipes.stop();
 };
 
 
@@ -383,9 +385,13 @@ exports.FlappyBird = FlappyBird;
 var flappyBird = require('./flappy_bird');
 
 document.addEventListener('DOMContentLoaded', function() {
-    var app = new flappyBird.FlappyBird();
+    app = new flappyBird.FlappyBird();
     app.run();
+
+    // Assigning the app to the global `window` object so we can
+    // can access it within other modules more easily
 });
+
 },{"./flappy_bird":12}],14:[function(require,module,exports){
 var CollisionSystem = function(entities) {
     this.entities = entities;
@@ -482,6 +488,7 @@ InputSystem.prototype.onClick = function() {
 };
 
 exports.InputSystem = InputSystem;
+
 },{}],17:[function(require,module,exports){
 var collisionSystem = require("./collision");
 
@@ -517,28 +524,29 @@ var pipe = require('../entities/pipe');
 
 var PipeSystem = function(entities) {
     this.entities = entities;
-
 };
 
 PipeSystem.prototype.run = function() {
     this.pipeFunction = window.setInterval(function newPipes() {
     this.entities.push(new pipe.Pipe(1, (Math.random() * 0.5) + 0.35), new pipe.Pipe(1.7, (Math.random() * -0.5) - 0));
 
-    for (var i = 3; i < this.entities.length; i++) {
+    for (var i = 3, c = this.entities.length; i < c; i++) {
         if (this.entities[i].components.physics.position.x < -1) {
         this.entities.splice(i, 1);
-
-
         }
     }
-
     }.bind(this), 2000);
-
-
 };
 
 PipeSystem.prototype.stop = function() {
-    clearInterval(pipeFunction);
+    if (this.pipeFunction !== null) {
+        window.clearInterval(this.pipeFunction);
+        this.pipeFunction = null;
+    }
+
+    for (var i = 3, c = this.entities.length; i < c; i++) {
+    this.entities[i].components.physics.velocity.x = 0;
+    }
 };
 
 
