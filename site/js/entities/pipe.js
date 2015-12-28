@@ -8,12 +8,12 @@ var Pipe = function(positionX, positionY) {
 	var physics = new physicsComponent.PhysicsComponent(this);
 	physics.position.x = positionX;
     physics.position.y = positionY;
-    physics.velocity.x = -0.65;
+    physics.velocity.x = -0.75;
 
     var graphics = new graphicsComponent.PipeGraphicsComponent(this);
 
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
-		var pipesystem = new pipeSystem.PipeSystem(this);
+
     collision.onCollision = this.onCollision.bind(this);
 
     this.components = {
@@ -24,7 +24,19 @@ var Pipe = function(positionX, positionY) {
 };
 
 Pipe.prototype.onCollision = function(entity) {
-    window.app.stop();
+	if (entity.components.collision.type === "circle") {
+		window.app.stop();
+		window.app.inputOff();
+		document.getElementById('game-over-modal').style.display = "block";
+		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
+		document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
+
+
+	}
+	else if (entity.components.collision.type === "counter") {
+		console.log("collided with counter");
+	}
+
 };
 
 exports.Pipe = Pipe;

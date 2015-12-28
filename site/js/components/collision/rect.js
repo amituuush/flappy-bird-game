@@ -8,9 +8,9 @@ RectCollisionComponent.prototype.collidesWith = function(entity) {
     if (entity.components.collision.type == 'circle') {
         return this.collideCircle(entity);
     }
-    // else if (entity.components.collision.type == 'rect') {
-    //     return this.collideRect(entity);
-    // }
+    else if (entity.components.collision.type == 'counter') {
+        return false;
+    }
     return false;
 };
 

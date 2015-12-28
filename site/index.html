@@ -9,6 +9,25 @@
     <canvas id="main-canvas">
     	Sorry, your browser does not support canvas.
     </canvas>
+	<div id="overlay">
+		<div id="counter"></div>
+		<div id="pipes">pipes</div>
+
+		<div id="game-over-modal">
+			<h1 id ="game-over"></h1>
+			<h2 id="pipe-counter">You cleared</h2>
+			<div id="pipes-cleared">0</div>
+			<p>pipes</p>
+
+			<button type="button">Retry</button>
+			<button type="button"><a href="#">Back to Home</a></button>
+		</div>
+	</div>
+<!--
+1. DONE \\ display score on game over modal
+2. retry button should restart game without reloading page
+3. shut off onClick listener once collision has occured
+-->
 
 
 <script type="text/javascript" src="js/app.js"></script>

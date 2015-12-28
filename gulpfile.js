@@ -100,14 +100,21 @@ gulp.task('scripts-combine', function() {
     'site/js/components/graphics/bird.js',
     'site/js/components/graphics/pipe.js',
     'site/js/components/physics/physics.js',
+    'site/js/components/physics/physics.js',
     'site/js/components/collision/circle.js',
     'site/js/components/collision/rect.js',
     'site/js/entities/bird.js',
     'site/js/entities/pipe.js',
+    'site/js/entities/ceiling.js',
+    'site/js/entities/floor.js',
+    'site/js/entities/left-wall.js',
+    'site/js/entities/counter.js',
     'site/js/systems/graphics.js',
     'site/js/systems/input.js',
     'site/js/systems/physics.js',
-    'site/js/systems/collision.js'
+    'site/js/systems/collision.js',
+    'site/js/systems/pipesystem.js',
+    'site/js/systems/scoresystem.js',
     ])
     .bundle()
     .pipe(source('app.js'))

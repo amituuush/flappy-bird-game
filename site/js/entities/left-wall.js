@@ -5,15 +5,13 @@ var flappyBird = require("../flappy_bird");
 
 var LeftWall = function() {
     var physics = new physicsComponent.PhysicsComponent(this);
-    physics.position.x = -0.25;
-    physics.position.y = 1;
+    physics.position.x = -0.7;
+    physics.position.y = 0;
 
     var graphics = new graphicsComponent.LeftWallGraphicsComponent(this);
 
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
     collision.onCollision = this.onCollision.bind(this);
-
-
 
     this.components = {
         physics: physics,
@@ -23,7 +21,7 @@ var LeftWall = function() {
 };
 
 LeftWall.prototype.onCollision = function() {
-    console.log("Collision with left wall");
+    window.app.deletePipes();
 
 };
 

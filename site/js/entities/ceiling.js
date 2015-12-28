@@ -24,6 +24,9 @@ var Ceiling = function() {
 
 Ceiling.prototype.onCollision = function() {
     window.app.stop();
+    document.getElementById('game-over-modal').style.display = "block";
+    document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
+    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
 };
 
 exports.Ceiling = Ceiling;
