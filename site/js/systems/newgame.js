@@ -10,3 +10,10 @@ var floor = require('./entities/floor');
 var leftWall = require('./entities/left-wall');
 var counter = require('./entities/counter');
 var flappyBird = require('./flappy_bird');
+
+
+var newGame = function() {
+    var newGamesArray = [];
+
+
+};

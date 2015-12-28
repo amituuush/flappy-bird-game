@@ -504,7 +504,7 @@ Pipe.prototype.onCollision = function(entity) {
 
 	}
 	else if (entity.components.collision.type === "counter") {
-		console.log("collided with counter");
+
 	}
 
 };
