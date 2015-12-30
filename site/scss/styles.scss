@@ -1,10 +1,43 @@
+@import url(https://fonts.googleapis.com/css?family=Passion+One:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+$mobile: 'min-width: 480px';
+$tablet: 'min-width: 768px';
+$desktop: 'min-width: 1024px';
+
+$bp-small: 'min-width: 24em';
+$bp-med: 'min-width: 46.8em';
+$bp-large: 'min-width: 50em';
+$bp-xl: 'min-width: 73em';
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/*-----------------------------------*/
+$flappy-font: 'Passion One', cursive;
+$sans-font: 'Open Sans', sans-serif;
+$thin: 300;
+$thicker: 400;
+$thick: 600;
+$lg-font: 4em;
+$text-center: center;
+$button-color: #00AFF0;
+$button-hover: lighten($button-color, 4%);
+$blue: #0A7B83;
+$green: #2AA876;
+$green-dark: darken($green, 17%);
+$yellow: #FFD265;
+$orange: #F19C65;
+$red: #CE4D45;
+
 html, body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 }
 
-canvas#main-canvas, div#overlay {
+canvas#main-canvas {
 	width: 100%;
 	height: 100%;
 }
@@ -15,6 +48,8 @@ div#overlay {
     top: 0;
     left: 0;
 	width: 100%;
+
+	text-align: center;
 }
 
 div#counter {
@@ -25,7 +60,7 @@ div#counter {
 	font-size: 3em;
 	padding-left: 0.75em;
 	padding-top: 0.5em;
-
+	text-align: left;
 }
 
 div#pipes {
@@ -39,6 +74,11 @@ div#pipes {
 	user-select: none;
 }
 
+button#start-button {
+	margin: 250px auto 0 auto;
+	display: block;
+}
+
 
 div#game-over-modal {
 	border: 1px solid black;
@@ -48,6 +88,10 @@ div#game-over-modal {
 	margin-top: 8em;
 	display: none;
 }
+
+// div#game-over-modal.hide {
+// 	display: none;
+// }
 
 div#game-over-modal p {
 	-webkit-user-select: none;  /* Chrome all / Safari all */
@@ -59,4 +103,48 @@ div#game-over-modal p {
 button a {
 	text-decoration: none;
 	color: #000;
+}
+
+// #flappy-bird {
+// 	width: 100px;
+// }
+
+div#start-button {
+  text-align: center;
+
+  opacity: 1;
+  width: 17em;
+  height: 8em;
+  margin: 15em auto 0 auto;
+  position: relative;
+  padding-top: 2em;
+
+
+
+
+  a {
+  font-family: $sans-font;
+  font-weight: $thin;
+  font-size: 1.5em;
+  text-decoration: none;
+  background-color: $green;
+  color: #fff;
+  padding: 0.6em 1.7em;
+  border-radius: 12px;
+  box-shadow: 0px 2px 3px #000;
+
+
+
+
+  &:hover {
+	background-color: lighten($green, 4%);
+  }
+
+  &:active {
+	background-color: darken($green, 10%);
+	box-shadow: inset 0px 0px 1px #000;
+	color: darken(#fff, 30%);
+  }
+
+  }
 }

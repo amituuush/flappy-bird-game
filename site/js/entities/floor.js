@@ -24,9 +24,10 @@ var Floor = function() {
 
 Floor.prototype.onCollision = function() {
     window.app.stop();
-    document.getElementById('game-over-modal').style.display = "block";
-    document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
+
+    document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
+    $('#game-over-modal').css('display', 'block');
 };
 
 exports.Floor = Floor;

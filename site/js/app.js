@@ -164,14 +164,21 @@ var BirdGraphicsComponent = function(entity) {
 
 BirdGraphicsComponent.prototype.draw = function(context) {
     var position = this.entity.components.physics.position;
-    
+
+    var image = document.getElementById('flappy-bird');
     context.save();
     context.translate(position.x, position.y);
-    context.beginPath();
-    context.arc(0, 0, 0.02, 0, 2 * Math.PI);
-    context.fill();
-    context.closePath();
+    // context.drawImage(image, 0, 0, 1360, 1083, 0, 0, 1360, 1083);
+    context.drawImage(image, -15, -15, 41, 41);
     context.restore();
+
+    // context.save();
+    // context.translate(position.x, position.y);
+    // context.beginPath();
+    // context.arc(0, 0, 0.02, 0, 2 * Math.PI);
+    // context.fill();
+    // context.closePath();
+    // context.restore();
 };
 
 exports.BirdGraphicsComponent = BirdGraphicsComponent;
@@ -365,9 +372,10 @@ var Ceiling = function() {
 
 Ceiling.prototype.onCollision = function() {
     window.app.stop();
-    document.getElementById('game-over-modal').style.display = "block";
-    document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
+
+    document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
+    $('#game-over-modal').css('display', 'block');
 };
 
 exports.Ceiling = Ceiling;
@@ -430,9 +438,10 @@ var Floor = function() {
 
 Floor.prototype.onCollision = function() {
     window.app.stop();
-    document.getElementById('game-over-modal').style.display = "block";
-    document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
+
+    document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
+    $('#game-over-modal').css('display', 'block');
 };
 
 exports.Floor = Floor;
@@ -497,11 +506,10 @@ Pipe.prototype.onCollision = function(entity) {
 	if (entity.components.collision.type === "circle") {
 		window.app.stop();
 		window.app.inputOff();
-		document.getElementById('game-over-modal').style.display = "block";
-		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
 		document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
 
-
+		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
+		$('#game-over-modal').css('display', 'block');
 	}
 	else if (entity.components.collision.type === "counter") {
 
@@ -559,9 +567,20 @@ exports.FlappyBird = FlappyBird;
 var flappyBird = require('./flappy_bird');
 
 document.addEventListener('DOMContentLoaded', function() {
-    app = new flappyBird.FlappyBird();
-    app.run();
+    document.getElementById('start-button').addEventListener('click', setTimeout (function() {
+        app = new flappyBird.FlappyBird();
+        app.run();
+        document.getElementById('start-button').style.display = "none";
 
+    }, 1000));
+
+
+    document.getElementById('new-game').addEventListener("click", function() {
+        var newGame = new flappyBird.FlappyBird();
+        newGame.run();
+        $('#game-over-modal').css('background', 'red');
+
+    });
     // Assigning the app to the global `window` object so we can
     // can access it within other modules more easily
 });
@@ -664,7 +683,7 @@ InputSystem.prototype.onClick = function() {
 InputSystem.prototype.stop = function() {
     var bird = this.entities[0];
     bird.components.physics.velocity.y = 0;
-
+ // create method on flappy bird constructor
 };
 
 exports.InputSystem = InputSystem;

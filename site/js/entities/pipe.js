@@ -27,11 +27,10 @@ Pipe.prototype.onCollision = function(entity) {
 	if (entity.components.collision.type === "circle") {
 		window.app.stop();
 		window.app.inputOff();
-		document.getElementById('game-over-modal').style.display = "block";
-		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
 		document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
 
-
+		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
+		$('#game-over-modal').css('display', 'block');
 	}
 	else if (entity.components.collision.type === "counter") {
 
