@@ -23,11 +23,8 @@ var Ceiling = function() {
 };
 
 Ceiling.prototype.onCollision = function() {
-    window.app.stop();
-    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
-
     document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
-    $('#game-over-modal').css('display', 'block');
+    window.app.collision();
 };
 
 exports.Ceiling = Ceiling;

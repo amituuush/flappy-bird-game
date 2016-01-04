@@ -39,4 +39,12 @@ FlappyBird.prototype.updateScore = function() {
     this.scores.update();
 };
 
+FlappyBird.prototype.collision = function() {
+    window.app.stop();
+    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
+    $('#game-over-modal').removeClass('hide');
+    // this.entities[0].resetPosition();
+
+};
+
 exports.FlappyBird = FlappyBird;

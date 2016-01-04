@@ -13,8 +13,6 @@ var Floor = function() {
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
     collision.onCollision = this.onCollision.bind(this);
 
-
-
     this.components = {
         physics: physics,
         collision: collision,
@@ -23,11 +21,8 @@ var Floor = function() {
 };
 
 Floor.prototype.onCollision = function() {
-    window.app.stop();
-    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
-
     document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
-    $('#game-over-modal').removeClass('hide');
+    window.app.collision();
 };
 
 exports.Floor = Floor;

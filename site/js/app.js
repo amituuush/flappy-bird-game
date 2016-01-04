@@ -160,7 +160,7 @@ exports.RectCollisionComponent = RectCollisionComponent;
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
     this.image = new Image();
-    this.image.src = '../site/img/flappy-bird-sml.gif';
+    this.image.src = '../site/img/flappy-bird-flat.png';
 
 };
 
@@ -170,16 +170,18 @@ BirdGraphicsComponent.prototype.draw = function(context) {
 
     context.save();
     context.translate(position.x, position.y);
-    context.drawImage(this.image, 0, 0, 80, 64);
+    context.scale(1, -1);
+    context.translate(-0.05, -0.05);
+    context.imageSmoothingEnabled = false;
+    context.drawImage(this.image, 0, 0, 0.1, 0.1);
+
 
     context.restore();
-
-    console.log(this.entity.components.physics.position);
 
     // context.save();
     // context.translate(position.x, position.y);
     // context.beginPath();
-    // context.arc(0, 0, 0.02, 0, 2 * Math.PI);
+    // context.arc(0, 0, 0.03, 0, 2 * Math.PI);
     // context.fill();
     // context.closePath();
     // context.restore();
@@ -332,7 +334,7 @@ var Bird = function() {
     physics.acceleration.y = -2;
 
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
-    var collision = new collisionComponent.CircleCollisionComponent(this, 0.02);
+    var collision = new collisionComponent.CircleCollisionComponent(this, 0.03);
     collision.onCollision = this.onCollision.bind(this); // ??
 
     this.components = {
@@ -341,6 +343,11 @@ var Bird = function() {
         collision: collision
     };
 };
+
+Bird.prototype.resetPosition = function() {
+    this.components.physics.position.y = 2;
+};
+
 
 Bird.prototype.onCollision = function(entity) {
     this.components.physics.acceleration.y = 0;
@@ -375,11 +382,8 @@ var Ceiling = function() {
 };
 
 Ceiling.prototype.onCollision = function() {
-    window.app.stop();
-    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
-
     document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
-    $('#game-over-modal').css('display', 'block');
+    window.app.collision();
 };
 
 exports.Ceiling = Ceiling;
@@ -431,8 +435,6 @@ var Floor = function() {
     var collision = new collisionComponent.RectCollisionComponent(this, graphics.size);
     collision.onCollision = this.onCollision.bind(this);
 
-
-
     this.components = {
         physics: physics,
         collision: collision,
@@ -441,11 +443,8 @@ var Floor = function() {
 };
 
 Floor.prototype.onCollision = function() {
-    window.app.stop();
-    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
-
     document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
-    $('#game-over-modal').removeClass('hide');
+    window.app.collision();
 };
 
 exports.Floor = Floor;
@@ -508,19 +507,10 @@ var Pipe = function(positionX, positionY) {
 
 Pipe.prototype.onCollision = function(entity) {
 	if (entity.components.collision.type === "circle") {
-		window.app.stop();
-		window.app.inputOff();
-		document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
-
-		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
-		$('#game-over-modal').css('display', 'block');
-
-
-
+		document.getElementById('game-over').innerHTML = "Birds don't like pipes. Remember that. Try again!";
+		window.app.collision();
 	}
-	else if (entity.components.collision.type === "counter") {
 
-	}
 
 };
 
@@ -568,6 +558,14 @@ FlappyBird.prototype.updateScore = function() {
     this.scores.update();
 };
 
+FlappyBird.prototype.collision = function() {
+    window.app.stop();
+    document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
+    $('#game-over-modal').removeClass('hide');
+    // this.entities[0].resetPosition();
+
+};
+
 exports.FlappyBird = FlappyBird;
 
 },{"./entities/bird":11,"./entities/ceiling":12,"./entities/counter":13,"./entities/floor":14,"./entities/left-wall":15,"./entities/pipe":16,"./systems/graphics":20,"./systems/input":21,"./systems/physics":22,"./systems/pipesystem":23,"./systems/scoresystem":24}],18:[function(require,module,exports){
@@ -582,11 +580,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     document.getElementById('new-game').addEventListener("click", function() {
-        var newGame = new flappyBird.FlappyBird();
-        newGame.run();
-        // $('#game-over-modal').addClass('hide');
-        document.getElementById('pipes-cleared').innerHTML = 0;
 
+        $('#game-over-modal').addClass('hide');
+        app.entities[0].components.physics.position.y = 0.5;
+        console.log(app.entities[0].components.physics.position.y);
+        // document.getElementById('pipes-cleared').innerHTML = 0;
+        document.getElementById('start-button').style.display = "block";
+        app.entities.splice(this.entities.length - 5, this.entities.length - 1);
+        console.log(app.entities);
     });
     // Assigning the app to the global `window` object so we can
     // can access it within other modules more easily

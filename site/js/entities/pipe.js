@@ -25,19 +25,10 @@ var Pipe = function(positionX, positionY) {
 
 Pipe.prototype.onCollision = function(entity) {
 	if (entity.components.collision.type === "circle") {
-		window.app.stop();
-		window.app.inputOff();
-		document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
-
-		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
-		$('#game-over-modal').css('display', 'block');
-
-
-
+		document.getElementById('game-over').innerHTML = "Birds don't like pipes. Remember that. Try again!";
+		window.app.collision();
 	}
-	else if (entity.components.collision.type === "counter") {
 
-	}
 
 };
 

@@ -10,7 +10,7 @@ var Bird = function() {
     physics.acceleration.y = -2;
 
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
-    var collision = new collisionComponent.CircleCollisionComponent(this, 0.02);
+    var collision = new collisionComponent.CircleCollisionComponent(this, 0.03);
     collision.onCollision = this.onCollision.bind(this); // ??
 
     this.components = {
@@ -19,6 +19,11 @@ var Bird = function() {
         collision: collision
     };
 };
+
+Bird.prototype.resetPosition = function() {
+    this.components.physics.position.y = 2;
+};
+
 
 Bird.prototype.onCollision = function(entity) {
     this.components.physics.acceleration.y = 0;
