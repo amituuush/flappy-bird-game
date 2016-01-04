@@ -159,18 +159,22 @@ exports.RectCollisionComponent = RectCollisionComponent;
 },{}],4:[function(require,module,exports){
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
+    this.image = new Image();
+    this.image.src = '../site/img/flappy-bird-sml.gif';
+
 };
 
 
 BirdGraphicsComponent.prototype.draw = function(context) {
     var position = this.entity.components.physics.position;
 
-    var image = document.getElementById('flappy-bird');
     context.save();
     context.translate(position.x, position.y);
-    // context.drawImage(image, 0, 0, 1360, 1083, 0, 0, 1360, 1083);
-    context.drawImage(image, -15, -15, 41, 41);
+    context.drawImage(this.image, 0, 0, 80, 64);
+
     context.restore();
+
+    console.log(this.entity.components.physics.position);
 
     // context.save();
     // context.translate(position.x, position.y);
@@ -441,7 +445,7 @@ Floor.prototype.onCollision = function() {
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
 
     document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
-    $('#game-over-modal').css('display', 'block');
+    $('#game-over-modal').removeClass('hide');
 };
 
 exports.Floor = Floor;
@@ -510,6 +514,9 @@ Pipe.prototype.onCollision = function(entity) {
 
 		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
 		$('#game-over-modal').css('display', 'block');
+
+
+
 	}
 	else if (entity.components.collision.type === "counter") {
 
@@ -567,18 +574,18 @@ exports.FlappyBird = FlappyBird;
 var flappyBird = require('./flappy_bird');
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('start-button').addEventListener('click', setTimeout (function() {
+    document.getElementById('start-button').addEventListener('click', function() {
         app = new flappyBird.FlappyBird();
         app.run();
         document.getElementById('start-button').style.display = "none";
-
-    }, 1000));
+    });
 
 
     document.getElementById('new-game').addEventListener("click", function() {
         var newGame = new flappyBird.FlappyBird();
         newGame.run();
-        $('#game-over-modal').css('background', 'red');
+        // $('#game-over-modal').addClass('hide');
+        document.getElementById('pipes-cleared').innerHTML = 0;
 
     });
     // Assigning the app to the global `window` object so we can
@@ -766,6 +773,10 @@ ScoreSystem.prototype.update = function() {
     this.realScore = Math.floor(this.score / 9);
     document.getElementById("counter").innerHTML = this.realScore;
 
+};
+
+ScoreSystem.prototype.reset = function() {
+    this.score = 0;
 };
 
 exports.ScoreSystem = ScoreSystem;

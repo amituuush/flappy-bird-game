@@ -13,4 +13,8 @@ ScoreSystem.prototype.update = function() {
 
 };
 
+ScoreSystem.prototype.reset = function() {
+    this.score = 0;
+};
+
 exports.ScoreSystem = ScoreSystem;

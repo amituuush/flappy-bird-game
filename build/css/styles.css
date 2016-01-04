@@ -72,9 +72,6 @@ button a {
   text-decoration: none;
   color: #000; }
 
-#flappy-bird {
-  width: 100px; }
-
 div#start-button {
   text-align: center;
   opacity: 1;

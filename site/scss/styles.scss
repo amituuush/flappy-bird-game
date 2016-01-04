@@ -80,18 +80,17 @@ button#start-button {
 }
 
 
-div#game-over-modal {
-	border: 1px solid black;
+#game-over-modal {
+	border: 1px solid orange;
 	width: 400px;
 	margin: 0 auto;
 	text-align: center;
 	margin-top: 8em;
-	display: none;
 }
 
-// div#game-over-modal.hide {
-// 	display: none;
-// }
+.hide {
+	display: none;
+}
 
 div#game-over-modal p {
 	-webkit-user-select: none;  /* Chrome all / Safari all */

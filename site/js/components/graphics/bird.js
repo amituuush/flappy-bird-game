@@ -1,17 +1,21 @@
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
+    this.image = new Image();
+    this.image.src = '../site/img/flappy-bird-sml.gif';
+
 };
 
 
 BirdGraphicsComponent.prototype.draw = function(context) {
     var position = this.entity.components.physics.position;
 
-    var image = document.getElementById('flappy-bird');
     context.save();
     context.translate(position.x, position.y);
-    // context.drawImage(image, 0, 0, 1360, 1083, 0, 0, 1360, 1083);
-    context.drawImage(image, -15, -15, 41, 41);
+    context.drawImage(this.image, 0, 0, 80, 64);
+
     context.restore();
+
+    console.log(this.entity.components.physics.position);
 
     // context.save();
     // context.translate(position.x, position.y);

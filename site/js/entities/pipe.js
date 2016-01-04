@@ -31,6 +31,9 @@ Pipe.prototype.onCollision = function(entity) {
 
 		document.getElementById('game-over').innerHTML = "Pipes don't like birds. Remember that. Try again!";
 		$('#game-over-modal').css('display', 'block');
+
+
+
 	}
 	else if (entity.components.collision.type === "counter") {
 

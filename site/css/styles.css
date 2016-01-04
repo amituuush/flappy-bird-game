@@ -51,12 +51,14 @@ button#start-button {
   margin: 250px auto 0 auto;
   display: block; }
 
-div#game-over-modal {
-  border: 1px solid black;
+#game-over-modal {
+  border: 1px solid orange;
   width: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 8em;
+  margin-top: 8em; }
+
+.hide {
   display: none; }
 
 div#game-over-modal p {

@@ -27,7 +27,7 @@ Floor.prototype.onCollision = function() {
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
 
     document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
-    $('#game-over-modal').css('display', 'block');
+    $('#game-over-modal').removeClass('hide');
 };
 
 exports.Floor = Floor;
