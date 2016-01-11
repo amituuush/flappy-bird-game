@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Passion+One:400,700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600,700,300);
 
 $mobile: 'min-width: 480px';
 $tablet: 'min-width: 768px';
@@ -17,6 +18,7 @@ body {
 /*-----------------------------------*/
 $flappy-font: 'Passion One', cursive;
 $sans-font: 'Open Sans', sans-serif;
+$source-code: 'Source Code Pro', ;
 $thin: 300;
 $thicker: 400;
 $thick: 600;
@@ -41,6 +43,9 @@ html, body {
 canvas#main-canvas {
 	width: 100%;
 	height: 100%;
+    background: url('../img/sky-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     // image-rendering: optimizeSpeed;
     // image-rendering: crisp-edges;
     // image-rendering: -moz-crisp-edges;
@@ -55,19 +60,43 @@ div#overlay {
     top: 0;
     left: 0;
 	width: 100%;
-
+    height: 100%;
 	text-align: center;
 }
 
-div#counter {
+div#scoreboard {
+    width: 7em;
+    height: 4em;
+    border-radius: 5px;
+    margin: 2em 0em 0em 2em;
+    background: lighten($red, 12%);
+    box-shadow: -0.5px 0.5px 0.5px 0.5px;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+p#pipes {
+    color: darken(#fff, 10%);
+    font-size: 1.4em;
+    font-family: $source-code;
+    padding: 0 0 0.5em 0;
+    margin: 0;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;
+}
+
+p#counter {
+    color: #fff;
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+    font-family: $source-code;
 	-webkit-user-select: none;  /* Chrome all / Safari all */
 	-moz-user-select: none;     /* Firefox all */
 	-ms-user-select: none;      /* IE 10+ */
 	user-select: none;
-	font-size: 3em;
-	padding-left: 0.75em;
-	padding-top: 0.5em;
-	text-align: left;
+
 }
 
 div#pipes {
@@ -90,11 +119,17 @@ div#pipes {
 
 
 #game-over-modal {
-	border: 1px solid orange;
 	width: 400px;
 	margin: 0 auto;
 	text-align: center;
-	margin-top: 8em;
+	margin-top: 5em;
+    padding-bottom: 2em;
+    border-radius: 5px;
+    background: $green-dark;
+    color: #fff;
+    font-family: $sans-font;
+    box-shadow: -1px 1px 1px #000;
+    border: 0.5px solid #000;
 }
 
 .hide {
@@ -106,31 +141,34 @@ div#game-over-modal p {
 	-moz-user-select: none;     /* Firefox all */
 	-ms-user-select: none;      /* IE 10+ */
 	user-select: none;
+    margin: 0;
+    padding: 0 0 1em 0;
+    font-size: 1.5em;
 }
 
-button a {
-	text-decoration: none;
-	color: #000;
+h1#game-over {
+    margin: 0;
+    padding: 0.75em 0 0.75em 0;
+    font-size: 1.5em;
+    border-bottom: 1px solid #000;
 }
 
-// #flappy-bird {
-// 	width: 100px;
-// }
+h2#pipe-counter {
+    margin: 0;
+    padding: 1em 0 0em 0;
+}
 
-div#start-button {
+div#pipes-cleared {
+    margin: 0 0 0.3em 0;
+    padding: 0;
+    font-size: 4em;
+}
+
+#start-button {
   text-align: center;
-
-  opacity: 1;
-  width: 17em;
-  height: 8em;
-  margin: 15em auto 0 auto;
+  margin: 7em auto 0 auto;
   position: relative;
-  padding-top: 2em;
-
-
-
-
-  a {
+  padding-top: 1em;
   font-family: $sans-font;
   font-weight: $thin;
   font-size: 1.5em;
@@ -140,12 +178,11 @@ div#start-button {
   padding: 0.6em 1.7em;
   border-radius: 12px;
   box-shadow: 0px 2px 3px #000;
-
-
-
+  border: none;
 
   &:hover {
 	background-color: lighten($green, 4%);
+    cursor: pointer;
   }
 
   &:active {
@@ -153,6 +190,77 @@ div#start-button {
 	box-shadow: inset 0px 0px 1px #000;
 	color: darken(#fff, 30%);
   }
-
+  &:focus {
+    outline: none;
   }
 }
+
+button a {
+	text-decoration: none;
+	color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.button-modal {
+  width: 8em;
+  text-align: center;
+  margin: 0em auto 0 auto;
+  position: relative;
+  font-family: $sans-font;
+  font-weight: $thicker;
+  font-size: 1.1em;
+  padding: 0.5em 0.5em;
+  background-color: $green;
+  color: #fff;
+
+  border-radius: 3px;
+  box-shadow: 0px 1px 1px #000;
+  border: none;
+
+  &:hover {
+	background-color: lighten($green, 4%);
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  &:active {
+	box-shadow: none;
+    background: $green;
+    transition: 0.1s;
+
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+#home {
+    background: lighten($green-dark, 10%);
+
+    &:hover {
+        background: lighten($green-dark, 12%);
+        transition: 0.5s;
+    }
+
+    &:active {
+  	box-shadow: none;
+    background: lighten($green-dark, 10%);
+    transition: 0.1s;
+    }
+}
+
+#new-game {
+    margin-right: 1em;
+}
+
+
+// div#input-mask {
+//     position: absolute;
+//     z-index: -1;
+//     width: 100%;
+//     height: 100%;
+//     border: 1px solid black;
+//     background: transparent;
+//     display: none;
+// }
