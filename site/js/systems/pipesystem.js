@@ -6,14 +6,14 @@ var PipeSystem = function(entities) {
 
 PipeSystem.prototype.run = function() {
     this.pipeFunction = window.setInterval(function newPipes() {
-    this.entities.push(new pipe.Pipe(1, (Math.random() * 0.5) + 0.35), new pipe.Pipe(1.7, (Math.random() * -0.5) - 0));
+    this.entities.push(new pipe.Pipe(1, (Math.random() * 0.6) + 0.4), new pipe.Pipe(1.55, (Math.random() * -0.1) - 0));
 
     for (var i = 5; i < this.entities.length; i++) {
-        if (this.entities[i].components.physics.position.x < -1) {
+        if (this.entities[i].components.physics.position.x < -2) {
         this.entities.splice(i, 1);
         }
     }
-    }.bind(this), 2000);
+}.bind(this), 1500);
 };
 
 PipeSystem.prototype.stop = function() {

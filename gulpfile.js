@@ -107,7 +107,7 @@ gulp.task('scripts-combine', function() {
     'site/js/entities/pipe.js',
     'site/js/entities/ceiling.js',
     'site/js/entities/floor.js',
-    'site/js/entities/left-wall.js',
+    'site/js/entities/ground.js',
     'site/js/entities/counter.js',
     'site/js/systems/graphics.js',
     'site/js/systems/input.js',

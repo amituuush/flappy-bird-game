@@ -11,17 +11,13 @@ var Bird = function() {
 
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
     var collision = new collisionComponent.CircleCollisionComponent(this, 0.03);
-    collision.onCollision = this.onCollision.bind(this); // ??
+    collision.onCollision = this.onCollision.bind(this);
 
     this.components = {
         physics: physics,
         graphics: graphics,
         collision: collision
     };
-};
-
-Bird.prototype.resetPosition = function() {
-    this.components.physics.position.y = 2;
 };
 
 

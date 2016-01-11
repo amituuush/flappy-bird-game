@@ -5,7 +5,7 @@ var flappyBird = require("../flappy_bird");
 
 var Counter = function() {
     var physics = new physicsComponent.PhysicsComponent(this);
-    physics.position.x = -0.125;
+    physics.position.x = -0.2;
     physics.position.y = 0;
 
     var graphics = new graphicsComponent.CounterGraphicsComponent(this);

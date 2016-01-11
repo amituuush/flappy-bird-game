@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Flappy Bird Game</title>
+	<title>Bird Strike Game</title>
 	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 <body>
@@ -12,29 +12,25 @@
 
 
 	<div id="overlay">
-		<div id="counter"></div>
-		<div id="pipes">pipes</div>
-
-		<div id="start-button"><img style="width: 20%;" src="img/flappy-bird-flat.png" id="flappy-bird" alt="Flappy Bird flapping" /></div>
+		<!-- <div id="input-mask" style="display: none"></div> -->
+		<div id="scoreboard">
+			<p id="counter">0</p>
+		</div>
+		<button id="start-button" type="button" name="button">Start</button>
 
 		<div id="game-over-modal" class="hide">
 			<h1 id="game-over"></h1>
-			<h2 id="pipe-counter">You cleared</h2>
+			<h2 id="pipe-counter">Pipes Cleared:</h2>
 			<div id="pipes-cleared">0</div>
-			<p>pipes</p>
-
-			<button id="new-game" type="button">New Game</button>
-			<button type="button"><a href="#">Back to Home</a></button>
+			<button id="new-game" class="button-modal" type="button">New Game</button>
+			<button class="button-modal" id="home" type="button"><a href="#">Back to Home</a></button>
 		</div>
 	</div>
 
 
 <!--
-1. DONE \\ display score on game over modal
-2. retry button should restart game without reloading page
-3. shut off onClick listener once collision has occured
-4. get 3-2-1 countdown at game beginning
-5.
+-shut off onClick listener once collision has occured
+-don't delete pipe/ground on collision
 -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

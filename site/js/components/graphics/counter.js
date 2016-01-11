@@ -10,6 +10,7 @@ CounterGraphicsComponent.prototype.draw = function(context) {
     context.translate(position.x, position.y);
     context.beginPath();
     context.fillStyle = "transparent";
+
     context.fillRect(0, 0, this.size.x, this.size.y);
     context.closePath();
     context.restore();

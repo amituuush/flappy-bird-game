@@ -6,7 +6,7 @@ var flappyBird = require("../flappy_bird");
 var Floor = function() {
     var physics = new physicsComponent.PhysicsComponent(this);
     physics.position.x = -0.25;
-    physics.position.y = -0.05;
+    physics.position.y = 0;
 
     var graphics = new graphicsComponent.FloorGraphicsComponent(this);
 
@@ -23,6 +23,7 @@ var Floor = function() {
 Floor.prototype.onCollision = function() {
     document.getElementById('game-over').innerHTML = "Crash landing. Try again!";
     window.app.collision();
+
 };
 
 exports.Floor = Floor;
