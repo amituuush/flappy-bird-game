@@ -14,7 +14,7 @@ html, body {
 canvas#main-canvas {
   width: 100%;
   height: 100%;
-  background: url("../img/mountain-background.jpg");
+  background: url("../img/sky-bg.png");
   background-repeat: no-repeat;
   background-size: cover; }
 
@@ -24,7 +24,6 @@ div#overlay {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   text-align: center; }
 
 div#scoreboard {
@@ -32,8 +31,8 @@ div#scoreboard {
   height: 4em;
   border-radius: 5px;
   margin: 2em 0em 0em 2em;
-  background: #CE4D45;
-  box-shadow: -1px 1px 1px 1px;
+  background: #db7b75;
+  box-shadow: -0.5px 0.5px 0.5px 0.5px;
   padding: 0.5em 0.5em 0.5em 0.5em; }
 
 p#pipes {
@@ -93,10 +92,11 @@ div#pipes {
   margin-top: 5em;
   padding-bottom: 2em;
   border-radius: 5px;
-  background: #2AA876;
+  background: #196345;
   color: #fff;
   font-family: "Open Sans", sans-serif;
-  box-shadow: 0px 0px 1px #000; }
+  box-shadow: -1px 1px 1px #000;
+  border: 0.5px solid #000; }
 
 .hide {
   display: none; }
@@ -124,7 +124,7 @@ h2#pipe-counter {
   padding: 1em 0 0em 0; }
 
 div#pipes-cleared {
-  margin: 0;
+  margin: 0 0 0.3em 0;
   padding: 0;
   font-size: 4em; }
 
@@ -168,20 +168,31 @@ button a {
   font-weight: 400;
   font-size: 1.1em;
   padding: 0.5em 0.5em;
-  background-color: #00AFF0;
+  background-color: #2AA876;
   color: #fff;
   border-radius: 3px;
   box-shadow: 0px 1px 1px #000;
   border: none; }
   .button-modal:hover {
     background-color: #2eb881;
-    cursor: pointer; }
+    cursor: pointer;
+    transition: 0.5s; }
   .button-modal:active {
-    background-color: #207f59;
-    box-shadow: inset 0px 0px 1px #000;
-    color: #b3b3b3; }
+    box-shadow: none;
+    background: #2AA876;
+    transition: 0.1s; }
   .button-modal:focus {
     outline: none; }
+
+#home {
+  background: #238b62; }
+  #home:hover {
+    background: #259468;
+    transition: 0.5s; }
+  #home:active {
+    box-shadow: none;
+    background: #238b62;
+    transition: 0.1s; }
 
 #new-game {
   margin-right: 1em; }
