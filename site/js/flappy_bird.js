@@ -19,6 +19,7 @@ var FlappyBird = function() {
     this.pipes = new pipeSystem.PipeSystem(this.entities);
     this.scores = new scoreSystem.ScoreSystem(this.entities, 0);
     this.ground = new groundSystem.GroundSystem(this.entities);
+    this.playing = true;
 };
 
 
@@ -48,6 +49,11 @@ FlappyBird.prototype.collision = function() {
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
     $('#game-over-modal').removeClass('hide');
     window.app.entities.splice(4, 1);
+
+    if (window.app.playing) {
+        window.app.playing = false;
+        console.log('died');
+    }
 
     // document.getElementById('input-mask').style.display = "block";
 
