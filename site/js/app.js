@@ -160,7 +160,7 @@ exports.RectCollisionComponent = RectCollisionComponent;
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
     this.image = new Image();
-    this.image.src = '../site/img/flappy-bird-flat.png';
+    this.image.src = 'img/flappy-bird-flat.png';
 
 };
 
@@ -280,7 +280,7 @@ var GroundGraphicsComponent = function(entity) {
     this.entity = entity;
     this.size = {x: 3, y: 0.15};
     this.image = new Image();
-    this.image.src = '../site/img/ground.png';
+    this.image.src = '/img/ground.png';
 };
 
 GroundGraphicsComponent.prototype.draw = function(context) {
