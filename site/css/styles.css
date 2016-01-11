@@ -24,45 +24,20 @@ div#overlay {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   text-align: center; }
 
-div#scoreboard {
-  width: 7em;
-  height: 4em;
-  border-radius: 5px;
-  margin: 2em 0em 0em 2em;
-  background: #db7b75;
-  box-shadow: -0.5px 0.5px 0.5px 0.5px;
-  padding: 0.5em 0.5em 0.5em 0.5em; }
-
-p#pipes {
-  color: #e6e6e6;
-  font-size: 1.4em;
-  font-family: "Source Code Pro";
-  padding: 0 0 0.5em 0;
-  margin: 0;
+div#counter {
   -webkit-user-select: none;
   /* Chrome all / Safari all */
   -moz-user-select: none;
   /* Firefox all */
   -ms-user-select: none;
   /* IE 10+ */
-  user-select: none; }
-
-p#counter {
-  color: #fff;
+  user-select: none;
   font-size: 3em;
-  margin: 0;
-  padding: 0;
-  font-family: "Source Code Pro";
-  -webkit-user-select: none;
-  /* Chrome all / Safari all */
-  -moz-user-select: none;
-  /* Firefox all */
-  -ms-user-select: none;
-  /* IE 10+ */
-  user-select: none; }
+  padding-left: 0.75em;
+  padding-top: 0.5em;
+  text-align: left; }
 
 div#pipes {
   font-size: 1.2em;
@@ -87,17 +62,11 @@ div#pipes {
   user-select: none; }
 
 #game-over-modal {
+  border: 1px solid orange;
   width: 400px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 5em;
-  padding-bottom: 2em;
-  border-radius: 5px;
-  background: #196345;
-  color: #fff;
-  font-family: "Open Sans", sans-serif;
-  box-shadow: -1px 1px 1px #000;
-  border: 0.5px solid #000; }
+  margin-top: 8em; }
 
 .hide {
   display: none; }
@@ -109,91 +78,33 @@ div#game-over-modal p {
   /* Firefox all */
   -ms-user-select: none;
   /* IE 10+ */
-  user-select: none;
-  margin: 0;
-  padding: 0 0 1em 0;
-  font-size: 1.5em; }
-
-h1#game-over {
-  margin: 0;
-  padding: 0.75em 0 0.75em 0;
-  font-size: 1.5em;
-  border-bottom: 1px solid #000; }
-
-h2#pipe-counter {
-  margin: 0;
-  padding: 1em 0 0em 0; }
-
-div#pipes-cleared {
-  margin: 0 0 0.3em 0;
-  padding: 0;
-  font-size: 4em; }
-
-#start-button {
-  text-align: center;
-  margin: 7em auto 0 auto;
-  position: relative;
-  padding-top: 1em;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-  font-size: 1.5em;
-  text-decoration: none;
-  background-color: #2AA876;
-  color: #fff;
-  padding: 0.6em 1.7em;
-  border-radius: 12px;
-  box-shadow: 0px 2px 3px #000;
-  border: none; }
-  #start-button:hover {
-    background-color: #2eb881;
-    cursor: pointer; }
-  #start-button:active {
-    background-color: #207f59;
-    box-shadow: inset 0px 0px 1px #000;
-    color: #b3b3b3; }
-  #start-button:focus {
-    outline: none; }
+  user-select: none; }
 
 button a {
   text-decoration: none;
-  color: #fff;
-  margin: 0;
-  padding: 0; }
+  color: #000; }
 
-.button-modal {
-  width: 8em;
+div#start-button {
   text-align: center;
-  margin: 0em auto 0 auto;
+  opacity: 1;
+  width: 17em;
+  height: 8em;
+  margin: 15em auto 0 auto;
   position: relative;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 400;
-  font-size: 1.1em;
-  padding: 0.5em 0.5em;
-  background-color: #2AA876;
-  color: #fff;
-  border-radius: 3px;
-  box-shadow: 0px 1px 1px #000;
-  border: none; }
-  .button-modal:hover {
-    background-color: #2eb881;
-    cursor: pointer;
-    transition: 0.5s; }
-  .button-modal:active {
-    box-shadow: none;
-    background: #2AA876;
-    transition: 0.1s; }
-  .button-modal:focus {
-    outline: none; }
-
-#home {
-  background: #238b62; }
-  #home:hover {
-    background: #259468;
-    transition: 0.5s; }
-  #home:active {
-    box-shadow: none;
-    background: #238b62;
-    transition: 0.1s; }
-
-#new-game {
-  margin-right: 1em; }
+  padding-top: 2em; }
+  div#start-button a {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1.5em;
+    text-decoration: none;
+    background-color: #2AA876;
+    color: #fff;
+    padding: 0.6em 1.7em;
+    border-radius: 12px;
+    box-shadow: 0px 2px 3px #000; }
+    div#start-button a:hover {
+      background-color: #2eb881; }
+    div#start-button a:active {
+      background-color: #207f59;
+      box-shadow: inset 0px 0px 1px #000;
+      color: #b3b3b3; }
