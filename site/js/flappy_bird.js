@@ -49,12 +49,9 @@ FlappyBird.prototype.collision = function() {
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
     $('#game-over-modal').removeClass('hide');
     window.app.entities.splice(4, 1);
-
     if (window.app.playing) {
         window.app.playing = false;
     }
-
-    // document.getElementById('input-mask').style.display = "block";
 
 };
 

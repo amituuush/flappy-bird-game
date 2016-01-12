@@ -624,12 +624,9 @@ FlappyBird.prototype.collision = function() {
     document.getElementById('pipes-cleared').innerHTML = window.app.scores.realScore;
     $('#game-over-modal').removeClass('hide');
     window.app.entities.splice(4, 1);
-
     if (window.app.playing) {
         window.app.playing = false;
     }
-
-    // document.getElementById('input-mask').style.display = "block";
 
 };
 
@@ -698,35 +695,41 @@ var GraphicsSystem = function(entities) {
 };
 
 GraphicsSystem.prototype.run = function() {
-    // Run the render loop
-    window.requestAnimationFrame(this.tick.bind(this));
+     {
+        window.requestAnimationFrame(this.tick.bind(this));
+    }
 };
 
 GraphicsSystem.prototype.tick = function() {
-    // Set the canvas to the correct size if the window is resized
-    if (this.canvas.width != this.canvas.offsetWidth ||
-        this.canvas.height != this.canvas.offsetHeight) {
-        this.canvas.width = this.canvas.offsetWidth * 2;
-        this.canvas.height = this.canvas.offsetHeight * 2;
-    }
-
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.context.save();
-    this.context.translate(this.canvas.width / 2, this.canvas.height);
-    this.context.scale(this.canvas.height, -this.canvas.height);
-
-    for (var i=0; i<this.entities.length; i++) {
-        var entity = this.entities[i];
-        if (!entity.components.graphics) {
-            continue;
+    if(window.app.playing) {
+        if (this.canvas.width != this.canvas.offsetWidth ||
+            this.canvas.height != this.canvas.offsetHeight) {
+            this.canvas.width = this.canvas.offsetWidth * 2;
+            this.canvas.height = this.canvas.offsetHeight * 2;
         }
 
-        entity.components.graphics.draw(this.context);
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.save();
+        this.context.translate(this.canvas.width / 2, this.canvas.height);
+        this.context.scale(this.canvas.height, -this.canvas.height);
+
+        for (var i=0; i<this.entities.length; i++) {
+            var entity = this.entities[i];
+            if (!entity.components.graphics) {
+                continue;
+            }
+
+            entity.components.graphics.draw(this.context);
+        }
+
+        this.context.restore();
+
+        window.requestAnimationFrame(this.tick.bind(this));
     }
+};
 
-    this.context.restore();
-
-    window.requestAnimationFrame(this.tick.bind(this));
+GraphicsSystem.prototype.stop = function() {
+    window.cancelAnimationFrame(this.tick.bind(this));
 };
 
 exports.GraphicsSystem = GraphicsSystem;
