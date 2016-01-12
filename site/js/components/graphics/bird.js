@@ -1,7 +1,7 @@
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
     this.image = new Image();
-    this.image.src = '../site/img/flappy-bird-sprite.png';
+    this.image.src = 'img/flappy-bird-sprite.png';
     this.width = 0.1;
     this.height = 0.1;
     this.tickCount = 0;

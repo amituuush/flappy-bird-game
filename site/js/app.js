@@ -160,7 +160,7 @@ exports.RectCollisionComponent = RectCollisionComponent;
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
     this.image = new Image();
-    this.image.src = '../site/img/flappy-bird-sprite.png';
+    this.image.src = 'img/flappy-bird-sprite.png';
     this.width = 0.1;
     this.height = 0.1;
     this.tickCount = 0;
@@ -260,7 +260,7 @@ FloorGraphicsComponent.prototype.draw = function(context) {
     context.save();
     context.translate(position.x, position.y);
     context.beginPath();
-    context.fillStyle = "red";
+    context.fillStyle = "transparent";
     context.fillRect(0, 0, this.size.x, this.size.y);
     context.closePath();
     context.restore();
@@ -274,7 +274,7 @@ var GroundGraphicsComponent = function(entity) {
     this.entity = entity;
     this.size = {x: 3, y: 0.15};
     this.image = new Image();
-    this.image.src = '../site/img/ground.png';
+    this.image.src = 'img/ground.png';
 };
 
 GroundGraphicsComponent.prototype.draw = function(context) {

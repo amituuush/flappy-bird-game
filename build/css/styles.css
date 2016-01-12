@@ -96,7 +96,14 @@ div#pipes {
   color: #fff;
   font-family: "Open Sans", sans-serif;
   box-shadow: -1px 1px 1px #000;
-  border: 0.5px solid #000; }
+  border: 0.5px solid #000;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none; }
 
 .hide {
   display: none; }
