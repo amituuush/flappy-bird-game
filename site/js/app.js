@@ -175,7 +175,7 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     context.save();
     context.translate(position.x, position.y);
     context.scale(1, -1);
-    context.translate(-0.05, -0.05);
+    context.translate(-0.05, -0.035);
     context.drawImage(this.image, this.frameIndex * 350, 0, 350, 350, 0, 0, this.width, this.height);
     context.restore();
 
@@ -188,22 +188,6 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     }
 
 
-
-
-
-    // this.tickCount += 1;
-    // if (this.tickCount > this.ticksPerFrame) {
-    //     this.tickCount = 0;
-    //     if(this.frameIndex < this.numberOfFrames - 1){
-    //     this.frameIndex += 1;
-    //     }
-    // }
-    // console.log(this.frameIndex);
-
-
-
-
-
     // context.save();
     // context.translate(position.x, position.y);
     // context.scale(1, -1);
@@ -214,7 +198,7 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     // context.save();
     // context.translate(position.x, position.y);
     // context.beginPath();
-    // context.arc(0, 0, 0.03, 0, 2 * Math.PI);
+    // context.arc(0, 0, 0.0275, 0, 2 * Math.PI);
     // context.fill();
     // context.closePath();
     // context.restore();
@@ -276,7 +260,7 @@ FloorGraphicsComponent.prototype.draw = function(context) {
     context.save();
     context.translate(position.x, position.y);
     context.beginPath();
-    context.fillStyle = "transparent";
+    context.fillStyle = "red";
     context.fillRect(0, 0, this.size.x, this.size.y);
     context.closePath();
     context.restore();
@@ -392,7 +376,7 @@ var Bird = function() {
     physics.acceleration.y = -2;
 
     var graphics = new graphicsComponent.BirdGraphicsComponent(this);
-    var collision = new collisionComponent.CircleCollisionComponent(this, 0.03);
+    var collision = new collisionComponent.CircleCollisionComponent(this, 0.0275);
     collision.onCollision = this.onCollision.bind(this);
 
     this.components = {
@@ -438,7 +422,7 @@ var Ceiling = function() {
 Ceiling.prototype.onCollision = function() {
     document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
     window.app.collision();
-    
+
 };
 
 exports.Ceiling = Ceiling;
@@ -483,7 +467,7 @@ var flappyBird = require("../flappy_bird");
 var Floor = function() {
     var physics = new physicsComponent.PhysicsComponent(this);
     physics.position.x = -0.25;
-    physics.position.y = 0;
+    physics.position.y = -0.01;
 
     var graphics = new graphicsComponent.FloorGraphicsComponent(this);
 

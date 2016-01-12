@@ -6,7 +6,7 @@ var flappyBird = require("../flappy_bird");
 var Floor = function() {
     var physics = new physicsComponent.PhysicsComponent(this);
     physics.position.x = -0.25;
-    physics.position.y = 0;
+    physics.position.y = -0.01;
 
     var graphics = new graphicsComponent.FloorGraphicsComponent(this);
 

@@ -16,7 +16,7 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     context.save();
     context.translate(position.x, position.y);
     context.scale(1, -1);
-    context.translate(-0.05, -0.05);
+    context.translate(-0.05, -0.035);
     context.drawImage(this.image, this.frameIndex * 350, 0, 350, 350, 0, 0, this.width, this.height);
     context.restore();
 
@@ -29,22 +29,6 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     }
 
 
-
-
-
-    // this.tickCount += 1;
-    // if (this.tickCount > this.ticksPerFrame) {
-    //     this.tickCount = 0;
-    //     if(this.frameIndex < this.numberOfFrames - 1){
-    //     this.frameIndex += 1;
-    //     }
-    // }
-    // console.log(this.frameIndex);
-
-
-
-
-
     // context.save();
     // context.translate(position.x, position.y);
     // context.scale(1, -1);
@@ -55,7 +39,7 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     // context.save();
     // context.translate(position.x, position.y);
     // context.beginPath();
-    // context.arc(0, 0, 0.03, 0, 2 * Math.PI);
+    // context.arc(0, 0, 0.0275, 0, 2 * Math.PI);
     // context.fill();
     // context.closePath();
     // context.restore();

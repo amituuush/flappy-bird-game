@@ -46,12 +46,7 @@ canvas#main-canvas {
     background: url('../img/sky-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
-    // image-rendering: optimizeSpeed;
-    // image-rendering: crisp-edges;
-    // image-rendering: -moz-crisp-edges;
-    // image-rendering: -o-crisp-edges;
-    // image-rendering: -webkit-optimize-contrast;
-    // -ms-interpolation-mode: nearest-neighbor;
+
 }
 
 div#overlay {
@@ -60,7 +55,6 @@ div#overlay {
     top: 0;
     left: 0;
 	width: 100%;
-    // height: 100%;
 	text-align: center;
 }
 
@@ -130,6 +124,10 @@ div#pipes {
     font-family: $sans-font;
     box-shadow: -1px 1px 1px #000;
     border: 0.5px solid #000;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;      /* IE 10+ */
+	user-select: none;
 }
 
 .hide {
@@ -253,14 +251,3 @@ button a {
 #new-game {
     margin-right: 1em;
 }
-
-
-// div#input-mask {
-//     position: absolute;
-//     z-index: -1;
-//     width: 100%;
-//     height: 100%;
-//     border: 1px solid black;
-//     background: transparent;
-//     display: none;
-// }

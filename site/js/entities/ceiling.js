@@ -25,7 +25,7 @@ var Ceiling = function() {
 Ceiling.prototype.onCollision = function() {
     document.getElementById('game-over').innerHTML = "Ouch! Watch your head! Try again.";
     window.app.collision();
-    
+
 };
 
 exports.Ceiling = Ceiling;
