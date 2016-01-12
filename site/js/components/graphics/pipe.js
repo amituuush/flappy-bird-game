@@ -2,7 +2,7 @@ var PipeGraphicsComponent = function(entity) {
     this.entity = entity;
     this.size = {x: 0.1, y: 0.65};
     this.image = new Image();
-    this.image.src = 'img/green-pipe.png';
+    this.image.src = 'img/pipe.png';
 };
 
 PipeGraphicsComponent.prototype.draw = function(context) {
@@ -16,8 +16,6 @@ PipeGraphicsComponent.prototype.draw = function(context) {
     context.drawImage(this.image, 0, -this.size.y, this.size.x, this.size.y);
     context.restore();
 
-
-
     // context.save();
     // context.translate(position.x, position.y);
     // context.beginPath();
@@ -25,8 +23,6 @@ PipeGraphicsComponent.prototype.draw = function(context) {
     // context.fillRect(0, 0, this.size.x, this.size.y);
     // context.closePath();
     // context.restore();
-
-
 };
 
 exports.PipeGraphicsComponent = PipeGraphicsComponent;
