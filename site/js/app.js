@@ -307,7 +307,7 @@ var PipeGraphicsComponent = function(entity) {
     this.entity = entity;
     this.size = {x: 0.1, y: 0.65};
     this.image = new Image();
-    this.image.src = '../site/img/green-pipe.png';
+    this.image.src = 'img/green-pipe.png';
 };
 
 PipeGraphicsComponent.prototype.draw = function(context) {
