@@ -4,9 +4,7 @@ var InputSystem = function(entities) {
 };
 
 InputSystem.prototype.run = function() {
-    console.log(window.app.playing);
     this.canvas.addEventListener('click', this.onClick.bind(this));
-
 };
 
 InputSystem.prototype.onClick = function() {
@@ -14,7 +12,6 @@ InputSystem.prototype.onClick = function() {
     if(window.app.playing) {
         bird.components.physics.velocity.y = 0.7;
     }
-    console.log(window.app.playing);
 };
 
 // InputSystem.prototype.stop = function() {

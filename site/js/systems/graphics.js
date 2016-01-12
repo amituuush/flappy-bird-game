@@ -20,7 +20,6 @@ GraphicsSystem.prototype.tick = function() {
     }
 
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.context.save();
     this.context.translate(this.canvas.width / 2, this.canvas.height);
     this.context.scale(this.canvas.height, -this.canvas.height);

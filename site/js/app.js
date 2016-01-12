@@ -160,8 +160,13 @@ exports.RectCollisionComponent = RectCollisionComponent;
 var BirdGraphicsComponent = function(entity) {
     this.entity = entity;
     this.image = new Image();
-    this.image.src = 'img/flappy-bird-flat.png';
-
+    this.image.src = '../site/img/flappy-bird-sprite.png';
+    this.width = 0.1;
+    this.height = 0.1;
+    this.tickCount = 0;
+    this.frameIndex = 0;
+    // this.ticksPerFrame = this.ticksPerFrame || 0;
+    // this.numberOfFrames = this.numberOfFrames || 1;
 };
 
 BirdGraphicsComponent.prototype.draw = function(context) {
@@ -171,35 +176,40 @@ BirdGraphicsComponent.prototype.draw = function(context) {
     context.translate(position.x, position.y);
     context.scale(1, -1);
     context.translate(-0.05, -0.05);
-    context.imageSmoothingEnabled = false;
-    context.drawImage(this.image, 0, 0, 0.1, 0.1);
+    context.drawImage(this.image, this.frameIndex * 350, 0, 350, 350, 0, 0, this.width, this.height);
     context.restore();
 
-//     this.image = new Image();
-//     this.image.src = '../site/img/flappy-bird-sprite.png';
-//     this.context = context;
-//     function sprite (options) {
-//
-//     var that = {};
-//
-//     that.context = this.context;
-//     that.width = options.width;
-//     that.height = options.height;
-//     that.image = options.image;
-//
-//     return that;
-//
-//     that.render = function() {
-//         that.context
-//     }
-// }
-//
-//     var birdAnimation = sprite({
-//         width: 0.1,
-//         height: 0.1,
-//         image: this.image;
-//     });
+    this.tickCount += 1;
+    if (this.tickCount % 4 === 0) {
+        this.frameIndex++;
+    }
+    if (this.frameIndex === 16) {
+        this.frameIndex = 0;
+    }
 
+
+
+
+
+    // this.tickCount += 1;
+    // if (this.tickCount > this.ticksPerFrame) {
+    //     this.tickCount = 0;
+    //     if(this.frameIndex < this.numberOfFrames - 1){
+    //     this.frameIndex += 1;
+    //     }
+    // }
+    // console.log(this.frameIndex);
+
+
+
+
+
+    // context.save();
+    // context.translate(position.x, position.y);
+    // context.scale(1, -1);
+    // context.translate(-0.05, -0.05);
+    // context.drawImage(this.image, 0, 0, 0.1, 0.1);
+    // context.restore();
 
     // context.save();
     // context.translate(position.x, position.y);
@@ -280,7 +290,7 @@ var GroundGraphicsComponent = function(entity) {
     this.entity = entity;
     this.size = {x: 3, y: 0.15};
     this.image = new Image();
-    this.image.src = '/img/ground.png';
+    this.image.src = '../site/img/ground.png';
 };
 
 GroundGraphicsComponent.prototype.draw = function(context) {
@@ -617,7 +627,6 @@ FlappyBird.prototype.collision = function() {
 
     if (window.app.playing) {
         window.app.playing = false;
-        console.log('died');
     }
 
     // document.getElementById('input-mask').style.display = "block";
@@ -702,7 +711,6 @@ GraphicsSystem.prototype.tick = function() {
     }
 
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.context.save();
     this.context.translate(this.canvas.width / 2, this.canvas.height);
     this.context.scale(this.canvas.height, -this.canvas.height);
@@ -757,9 +765,7 @@ var InputSystem = function(entities) {
 };
 
 InputSystem.prototype.run = function() {
-    console.log(window.app.playing);
     this.canvas.addEventListener('click', this.onClick.bind(this));
-
 };
 
 InputSystem.prototype.onClick = function() {
@@ -767,7 +773,6 @@ InputSystem.prototype.onClick = function() {
     if(window.app.playing) {
         bird.components.physics.velocity.y = 0.7;
     }
-    console.log(window.app.playing);
 };
 
 // InputSystem.prototype.stop = function() {

@@ -52,7 +52,6 @@ FlappyBird.prototype.collision = function() {
 
     if (window.app.playing) {
         window.app.playing = false;
-        console.log('died');
     }
 
     // document.getElementById('input-mask').style.display = "block";
